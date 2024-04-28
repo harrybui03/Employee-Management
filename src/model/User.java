@@ -9,19 +9,19 @@ package model;
  * @author Admin
  */
 public class User {
-    private int id;
+    private Integer id;
     private String username;
     private String password;
     private String role;
     private String address;
     private String gender;
     private String email;
-    private int salary_id;
+    private Integer salary_id;
 
     public User() {
     }
 
-    public User(int id, String username, String password, String role, String address, String gender, String email, int salary_id) {
+    public User(Integer id, String username, String password, String role, String address, String gender, String email, Integer salary_id) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -32,7 +32,7 @@ public class User {
         this.salary_id = salary_id;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -64,7 +64,7 @@ public class User {
         return salary_id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -92,7 +92,7 @@ public class User {
         this.email = email;
     }
 
-    public void setSalary_id(int salary_id) {
+    public void setSalary_id(Integer salary_id) {
         this.salary_id = salary_id;
     }
     
