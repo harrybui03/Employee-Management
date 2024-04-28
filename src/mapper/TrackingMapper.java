@@ -21,8 +21,8 @@ public class TrackingMapper implements RowMapper<Tracking>{
             tracking.setId(rs.getInt("id"));
             tracking.setCheckin(rs.getTimestamp("checkin"));
             tracking.setCheckout(rs.getTimestamp("checkout"));
-            tracking.setShift_id(rs.getInt("shift_id"));
-            tracking.setUser_id(rs.getInt("user_id"));
+            tracking.setShiftId(rs.getInt("shift_id"));
+            tracking.setUserId(rs.getInt("user_id"));
             tracking.setRegisterd(rs.getBoolean("registered"));
             return tracking;
         } catch (SQLException e) {

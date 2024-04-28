@@ -12,16 +12,16 @@ public class ExtraHours {
     private Integer id;
     private Integer numberHours;
     private boolean status;
-    private Integer tracking_id;
+    private Integer trackingId;
 
     public ExtraHours() {
     }
 
-    public ExtraHours(Integer id, Integer numberHours, boolean status, Integer tracking_id) {
+    public ExtraHours(Integer id, Integer numberHours, boolean status, Integer trackingId) {
         this.id = id;
         this.numberHours = numberHours;
         this.status = status;
-        this.tracking_id = tracking_id;
+        this.trackingId = trackingId;
     }
 
     public Integer getId() {
@@ -36,8 +36,8 @@ public class ExtraHours {
         return status;
     }
 
-    public Integer getTracking_id() {
-        return tracking_id;
+    public Integer getTrackingId() {
+        return trackingId;
     }
 
     public void setId(Integer id) {
@@ -52,8 +52,8 @@ public class ExtraHours {
         this.status = status;
     }
 
-    public void setTracking_id(Integer tracking_id) {
-        this.tracking_id = tracking_id;
+    public void setTrackingId(Integer trackingId) {
+        this.trackingId = trackingId;
     }
     
     

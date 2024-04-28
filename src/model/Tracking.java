@@ -14,19 +14,19 @@ public class Tracking {
     private Integer id;
     private Timestamp checkin;
     private Timestamp checkout;
-    private Integer shift_id;
-    private Integer user_id;
+    private Integer shiftId;
+    private Integer userId;
     private boolean registerd;
 
     public Tracking() {
     }
 
-    public Tracking(Integer id, Timestamp checkin, Timestamp checkout, Integer shift_id, Integer user_id, boolean registerd) {
+    public Tracking(Integer id, Timestamp checkin, Timestamp checkout, Integer shiftId, Integer userId, boolean registerd) {
         this.id = id;
         this.checkin = checkin;
         this.checkout = checkout;
-        this.shift_id = shift_id;
-        this.user_id = user_id;
+        this.shiftId = shiftId;
+        this.userId = userId;
         this.registerd = registerd;
     }
 
@@ -42,12 +42,12 @@ public class Tracking {
         return checkout;
     }
 
-    public Integer getShift_id() {
-        return shift_id;
+    public Integer getShiftId() {
+        return shiftId;
     }
 
-    public Integer getUser_id() {
-        return user_id;
+    public Integer getUserId() {
+        return userId;
     }
 
     public boolean isRegisterd() {
@@ -66,12 +66,12 @@ public class Tracking {
         this.checkout = checkout;
     }
 
-    public void setShift_id(Integer shift_id) {
-        this.shift_id = shift_id;
+    public void setShiftId(Integer shiftId) {
+        this.shiftId = shiftId;
     }
 
-    public void setUser_id(Integer user_id) {
-        this.user_id = user_id;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public void setRegisterd(boolean registerd) {
