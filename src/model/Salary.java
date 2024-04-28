@@ -9,50 +9,53 @@ package model;
  * @author Admin
  */
 public class Salary {
-    private int id;
-    private int penaltyHours;
-    private int bonus;
-    private int hourly;
+    private Integer id;
+    private Integer penaltyHours;
+    private Integer bonus;
+    private Integer hourly;
 
     public Salary() {
     }
-    public Salary(int id, int penaltyHours, int bonus, int hourly) {
+
+    public Salary(Integer id, Integer penaltyHours, Integer bonus, Integer hourly) {
         this.id = id;
         this.penaltyHours = penaltyHours;
         this.bonus = bonus;
         this.hourly = hourly;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public int getPenaltyHours() {
+    public Integer getPenaltyHours() {
         return penaltyHours;
     }
 
-    public int getBonus() {
+    public Integer getBonus() {
         return bonus;
     }
 
-    public int getHourly() {
+    public Integer getHourly() {
         return hourly;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public void setPenaltyHours(int penaltyHours) {
+    public void setPenaltyHours(Integer penaltyHours) {
         this.penaltyHours = penaltyHours;
     }
 
-    public void setBonus(int bonus) {
+    public void setBonus(Integer bonus) {
         this.bonus = bonus;
     }
 
-    public void setHourly(int hourly) {
+    public void setHourly(Integer hourly) {
         this.hourly = hourly;
     }
+    
+    
     
 }

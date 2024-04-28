@@ -1,7 +1,10 @@
 
 import dao.DbContext;
+import dao.ShiftDAO;
 import javaapplication1.auth.Login;
 import java.sql.*;
+import model.Shift;
+import java.sql.Timestamp;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
@@ -20,8 +23,9 @@ public class JavaApplication1 {
     public static void main(String[] args) {
         Login login = new Login();
         DbContext db = new DbContext();
-        Connection conn = db.getConnection();
         login.setVisible(true);
-        Connection c = db.getConnection();
+        Shift shift = new Shift(null,  new Timestamp(System.currentTimeMillis()),new Timestamp(System.currentTimeMillis()));
+        ShiftDAO shiftDAO = new ShiftDAO();
+        shiftDAO.save(shift);
     }
 }
