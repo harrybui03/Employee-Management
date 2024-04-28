@@ -22,5 +22,6 @@ public class JavaApplication1 {
         DbContext db = new DbContext();
         Connection conn = db.getConnection();
         login.setVisible(true);
+        Connection c = db.getConnection();
     }
 }
