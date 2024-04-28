@@ -9,14 +9,14 @@ package javaapplication1.auth;
  * @author ADMIN
  */
 public class ResetPassword extends javax.swing.JFrame {
-
+    Login login;
     /**
      * Creates new form Login
      */
     public ResetPassword() {
         initComponents();
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -105,7 +105,9 @@ public class ResetPassword extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        this.setVisible(false);
+        login = new Login();
+        login.setVisible(rootPaneCheckingEnabled);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
