@@ -21,7 +21,7 @@ public class ExtraHoursMapper implements RowMapper<ExtraHours>{
             extraHours.setId(rs.getInt("id"));
             extraHours.setNumberHours(rs.getInt("number_hours"));
             extraHours.setStatus(rs.getBoolean("status"));
-            extraHours.setTracking_id(rs.getInt("tracking_id"));
+            extraHours.setTrackingId(rs.getInt("tracking_id"));
             return extraHours;
         } catch (SQLException e) {
             return null;

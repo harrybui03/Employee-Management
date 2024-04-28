@@ -16,12 +16,12 @@ public class User {
     private String address;
     private String gender;
     private String email;
-    private Integer salary_id;
+    private Integer salaryId;
 
     public User() {
     }
 
-    public User(Integer id, String username, String password, String role, String address, String gender, String email, Integer salary_id) {
+    public User(Integer id, String username, String password, String role, String address, String gender, String email, Integer salaryId) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -29,7 +29,7 @@ public class User {
         this.address = address;
         this.gender = gender;
         this.email = email;
-        this.salary_id = salary_id;
+        this.salaryId = salaryId;
     }
 
     public Integer getId() {
@@ -60,8 +60,8 @@ public class User {
         return email;
     }
 
-    public int getSalary_id() {
-        return salary_id;
+    public Integer getSalaryId() {
+        return salaryId;
     }
 
     public void setId(Integer id) {
@@ -92,9 +92,9 @@ public class User {
         this.email = email;
     }
 
-    public void setSalary_id(Integer salary_id) {
-        this.salary_id = salary_id;
+    public void setSalaryId(Integer salaryId) {
+        this.salaryId = salaryId;
     }
-    
+
     
 }

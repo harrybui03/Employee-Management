@@ -11,15 +11,15 @@ package model;
 public class MissingHours {
     private Integer id;
     private Integer numberHours;
-    private Integer tracking_id;
+    private Integer trackingId;
 
     public MissingHours() {
     }
 
-    public MissingHours(Integer id, Integer numberHours, Integer tracking_id) {
+    public MissingHours(Integer id, Integer numberHours, Integer trackingId) {
         this.id = id;
         this.numberHours = numberHours;
-        this.tracking_id = tracking_id;
+        this.trackingId = trackingId;
     }
 
     public Integer getId() {
@@ -30,8 +30,8 @@ public class MissingHours {
         return numberHours;
     }
 
-    public Integer getTracking_id() {
-        return tracking_id;
+    public Integer getTrackingId() {
+        return trackingId;
     }
 
     public void setId(Integer id) {
@@ -42,8 +42,8 @@ public class MissingHours {
         this.numberHours = numberHours;
     }
 
-    public void setTracking_id(Integer tracking_id) {
-        this.tracking_id = tracking_id;
+    public void setTrackingId(Integer trackingId) {
+        this.trackingId = trackingId;
     }
 
     

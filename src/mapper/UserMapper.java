@@ -25,7 +25,7 @@ public class UserMapper implements RowMapper<User>{
             user.setAddress(rs.getString("address"));
             user.setGender(rs.getString("gender"));
             user.setRole(rs.getString("role"));
-            user.setSalary_id(rs.getInt("salary_id"));
+            user.setSalaryId(rs.getInt("salary_id"));
             return user;
         } catch (SQLException e) {
             return null;

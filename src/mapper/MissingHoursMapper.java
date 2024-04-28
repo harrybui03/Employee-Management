@@ -19,7 +19,7 @@ public class MissingHoursMapper implements RowMapper<MissingHours>{
             MissingHours missingHours = new MissingHours();
             missingHours.setId(rs.getInt("id"));
             missingHours.setNumberHours(rs.getInt("number_hours"));
-            missingHours.setTracking_id(rs.getInt("tracking_id"));
+            missingHours.setTrackingId(rs.getInt("tracking_id"));
             return missingHours;
         } catch (SQLException e) {
             return null;
