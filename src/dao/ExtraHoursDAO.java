@@ -4,10 +4,12 @@
  */
 package dao;
 
+import model.ExtraHours;
+
 /**
  *
  * @author Admin
  */
-public class ExtraHoursDAO {
+public class ExtraHoursDAO extends DbContext<ExtraHours>{
     
 }

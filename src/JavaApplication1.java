@@ -31,6 +31,6 @@ public class JavaApplication1 {
         shiftDAO.save(shift);
         UserDAO userDAO = new UserDAO();
         User user = new User(null, "ad", "ad", "role", "adres", "gender", "email", 1);
-        userDAO.save(user);
+        userDAO.deleteUser(1);
     }
 }

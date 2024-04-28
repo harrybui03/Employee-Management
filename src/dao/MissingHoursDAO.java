@@ -4,10 +4,12 @@
  */
 package dao;
 
+import model.MissingHours;
+
 /**
  *
  * @author Admin
  */
-public class MissingHoursDAO {
+public class MissingHoursDAO extends DbContext<MissingHours>{
     
 }

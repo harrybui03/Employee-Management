@@ -4,10 +4,12 @@
  */
 package dao;
 
+import model.Tracking;
+
 /**
  *
  * @author Admin
  */
-public class TrackingDAO {
+public class TrackingDAO extends DbContext<Tracking>{
     
 }
