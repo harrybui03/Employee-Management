@@ -121,9 +121,10 @@ public class DbContext<T> {
                 try {
                     connection.rollback();
                 } catch (SQLException e1) {
-                    e1.printStackTrace();
+                    System.out.println(e1.getMessage());
                 }
             }
+            System.out.println(e.getMessage());
         } finally {
             try {
                 if (connection != null) {
@@ -188,6 +189,10 @@ public class DbContext<T> {
                     statement.setInt(index, (Integer) parameter);
                 } else if (parameter instanceof Timestamp) {
                     statement.setTimestamp(index, (Timestamp) parameter);
+                } else if (parameter instanceof Boolean) {
+                    statement.setBoolean(index, (Boolean) parameter);
+                } else if (parameter == null) {
+                    statement.setNull(index, Types.NULL);
                 }
             }
         } catch (SQLException e) {

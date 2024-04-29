@@ -16,12 +16,12 @@ public class Tracking {
     private Timestamp checkout;
     private Integer shiftId;
     private Integer userId;
-    private boolean registerd;
+    private Boolean registerd;
 
     public Tracking() {
     }
 
-    public Tracking(Integer id, Timestamp checkin, Timestamp checkout, Integer shiftId, Integer userId, boolean registerd) {
+    public Tracking(Integer id, Timestamp checkin, Timestamp checkout, Integer shiftId, Integer userId, Boolean registerd) {
         this.id = id;
         this.checkin = checkin;
         this.checkout = checkout;
@@ -50,7 +50,7 @@ public class Tracking {
         return userId;
     }
 
-    public boolean isRegisterd() {
+    public Boolean isRegisterd() {
         return registerd;
     }
 
@@ -74,7 +74,7 @@ public class Tracking {
         this.userId = userId;
     }
 
-    public void setRegisterd(boolean registerd) {
+    public void setRegisterd(Boolean registerd) {
         this.registerd = registerd;
     }
 
