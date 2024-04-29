@@ -24,6 +24,11 @@ public class ShiftDAO extends DbContext<Shift>{
         return query(sql, new ShiftMapper());
     }
     
+    public List<Shift> findById(Integer id) {
+        String sql = "SELECT * FROM shift WHERE id = ?";
+        return query(sql, new ShiftMapper(), id);
+    }
+    
     public List<Shift> findByTime() {
         Timestamp time = new Timestamp(System.currentTimeMillis());
         String sql = "SELECT * FROM shift WHERE time_start <= ? AND time_end >= ?";

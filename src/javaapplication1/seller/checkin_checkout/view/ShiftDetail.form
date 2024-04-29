@@ -105,6 +105,7 @@
         <Property name="text" type="java.lang.String" value="Checkin"/>
       </Properties>
       <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButton1MouseClicked"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
       </Events>
     </Component>
@@ -120,6 +121,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Cancel"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton3ActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
@@ -135,11 +139,22 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="09:00"/>
       </Properties>
+      <Events>
+        <EventHandler event="ancestorAdded" listener="javax.swing.event.AncestorListener" parameters="javax.swing.event.AncestorEvent" handler="jLabel5AncestorAdded"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="jLabel5.setText(formattedTime);"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="Timestamp timeStart = currentShift.getTimeStart();&#xa;SimpleDateFormat dateFormat = new SimpleDateFormat(&quot;HH:mm&quot;);&#xa;Date date = new Date(timeStart.getTime());&#xa;String formattedTime = dateFormat.format(date);"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel6">
       <Properties>
         <Property name="text" type="java.lang.String" value="24:00"/>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="jLabel6.setText(formattedTimeend);"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="Timestamp timeEnd = currentShift.getTimeEnd();&#xa;SimpleDateFormat dateEndFormat = new SimpleDateFormat(&quot;HH:mm&quot;);&#xa;Date dateEnd = new Date(timeEnd.getTime());&#xa;String formattedTimeend = dateEndFormat.format(dateEnd);"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

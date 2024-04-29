@@ -14,7 +14,7 @@ public class Shift {
     private Integer id;
     private Timestamp timeStart;
     private Timestamp timeEnd;
-
+    
     public Shift() {
     }
 
