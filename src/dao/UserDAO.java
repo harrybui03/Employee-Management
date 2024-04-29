@@ -18,4 +18,9 @@ public class UserDAO extends DbContext<User>{
         return insert(sql.toString(), user.getUsername(), user.getPassword(), user.getRole(),
                 user.getAddress(), user.getGender(), user.getEmail(), user.getSalaryId());
     }
+    
+    public void deleteUser(Integer id) {
+        String sql = "DELETE FROM user where id = ?";
+        delete(sql, id);
+    }
 }

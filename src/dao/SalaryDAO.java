@@ -4,10 +4,12 @@
  */
 package dao;
 
+import model.Salary;
+
 /**
  *
  * @author Admin
  */
-public class SalaryDAO {
+public class SalaryDAO extends DbContext<Salary>{
     
 }
