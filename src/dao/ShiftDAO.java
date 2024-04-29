@@ -4,6 +4,7 @@
  */
 package dao;
 
+import java.sql.Timestamp;
 import java.util.List;
 import mapper.ShiftMapper;
 import model.Shift;
@@ -21,6 +22,12 @@ public class ShiftDAO extends DbContext<Shift>{
     public List<Shift> findAll() {
         String sql = "SELECT * FROM shift";
         return query(sql, new ShiftMapper());
+    }
+    
+    public List<Shift> findByTime() {
+        Timestamp time = new Timestamp(System.currentTimeMillis());
+        String sql = "SELECT * FROM shift WHERE time_start <= ? AND time_end >= ?";
+        return query(sql, new ShiftMapper(), time, time);
     }
     
 }

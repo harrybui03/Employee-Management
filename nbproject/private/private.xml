@@ -3,7 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Admin/Desktop/BTL_CNPM/src/javaapplication1/admin/CreateAccount.java</file>
+            <file>file:/C:/Users/Admin/Desktop/BTL_CNPM/src/javaapplication1/seller/Salary.java</file>
+            <file>file:/C:/Users/Admin/Desktop/BTL_CNPM/src/javaapplication1/seller/checkin_checkout/view/ShiftDetailFrm.java</file>
+            <file>file:/C:/Users/Admin/Desktop/BTL_CNPM/src/dao/ShiftDAO.java</file>
+            <file>file:/C:/Users/Admin/Desktop/BTL_CNPM/src/javaapplication1/auth/Login.java</file>
         </group>
     </open-files>
 </project-private>
