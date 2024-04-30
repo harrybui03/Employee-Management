@@ -45,10 +45,10 @@ public class JavaApplication1 {
 //        System.out.println(gets.size());
 //        ListAccount listAccount = new ListAccount();
 //        listAccount.setVisible(true);
-        CheckingCtr checkingCtr = new CheckingCtr(5);
+//        CheckingCtr checkingCtr = new CheckingCtr(5);
 //         ListAccount listAccount = new ListAccount();
 //         listAccount.setVisible(true);
-//        ManagerF manager = new ManagerF();
-//        manager.setVisible(true);
+        ManagerF manager = new ManagerF();
+        manager.setVisible(true);
     }
 }

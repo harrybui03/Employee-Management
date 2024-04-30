@@ -8,6 +8,7 @@ import dao.ShiftDAO;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
@@ -189,9 +190,13 @@ public class ManagerF extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        setVisible(false);
-        UpdateShift update = new UpdateShift(currentShift);
-        update.setVisible(true);
+        if(currentShift == null) {
+            JOptionPane.showMessageDialog(null, "You have to choose a shift", "Manage Shift!", JOptionPane.OK_OPTION);
+        } else {
+            setVisible(false);
+            UpdateShift update = new UpdateShift(currentShift);
+            update.setVisible(true);
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
