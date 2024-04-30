@@ -8,6 +8,7 @@ import java.sql.*;
 import model.Shift;
 import java.sql.Timestamp;
 import java.util.List;
+import javaapplication1.admin.manage_account.view.ListAccount;
 import javaapplication1.seller.checkin_checkout.CheckingCtr;
 import javaapplication1.seller.checkin_checkout.view.ShiftDetail;
 import javax.swing.SwingUtilities;
@@ -28,23 +29,23 @@ public class JavaApplication1 {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        CheckingCtr checkingCtr = new CheckingCtr(2);
-    }
 //    public static void main(String[] args) {
-//        Login login = new Login();
-//        DbContext db = new DbContext();
-//        login.setVisible(true);
+//        CheckingCtr checkingCtr = new CheckingCtr(2);
+//    }
+    public static void main(String[] args) {
 //        Shift shift = new Shift(null,  new Timestamp(System.currentTimeMillis()),new Timestamp(System.currentTimeMillis()+1000*60*60*4));
 //        ShiftDAO shiftDAO = new ShiftDAO();
 //        shiftDAO.save(shift);
 //        Boolean x = true;
-//        Tracking tracking = new Tracking(null, null, null, 10, 2, x);
+//        Tracking tracking = new Tracking(null, null, null, 11, 3, x);
 //        TrackingDAO trackingDAO = new TrackingDAO();
 //        trackingDAO.save(tracking);
 //        List<Shift> gets = shiftDAO.findByTime();
 //        System.out.println(gets.size());
-//        ShiftDetail shiftDetail = new ShiftDetail(new User(2, null, null, null, null, null, null, 1));
-//        shiftDetail.setVisible(true);
-//    }
+//        ListAccount listAccount = new ListAccount();
+//        listAccount.setVisible(true);
+//        CheckingCtr checkingCtr = new CheckingCtr(3);
+         ListAccount listAccount = new ListAccount();
+         listAccount.setVisible(true);
+    }
 }

@@ -97,7 +97,7 @@ public class Checkin extends javax.swing.JFrame {
         Timestamp timeCheckin = new Timestamp(System.currentTimeMillis());
         tracking.setCheckin(timeCheckin);
         TrackingDAO trackingDAO = new TrackingDAO();
-        trackingDAO.update(tracking);
+        trackingDAO.updateTrack(tracking);
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
         String formattedTime = sdf.format(new Date());
         JOptionPane.showMessageDialog(null, "Checkin successfully at " + formattedTime, "Checkin complete!", JOptionPane.INFORMATION_MESSAGE);

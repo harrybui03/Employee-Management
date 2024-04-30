@@ -4,6 +4,14 @@
  */
 package javaapplication1.admin.manage_account.view;
 
+import dao.UserDAO;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
+import model.User;
+
 /**
  *
  * @author ADMIN
@@ -13,7 +21,11 @@ public class ListAccount extends javax.swing.JFrame {
     /**
      * Creates new form ListAccount
      */
+    private UserDAO userDAO = new UserDAO();
+    private User currentUser;
+    private List<User>users;
     public ListAccount() {
+        users = userDAO.findAll();
         initComponents();
     }
 
@@ -41,18 +53,50 @@ public class ListAccount extends javax.swing.JFrame {
 
             },
             new String [] {
-                "STT", "Username", "Role"
+                "Id", "Username", "Password", "Email", "Gender", "Role", "Address"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        for(int i = 0; i < users.size(); i++) {
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            Object[] rowData = {users.get(i).getId(),
+                users.get(i).getUsername(),
+                users.get(i).getPassword(),
+                users.get(i).getEmail(),
+                users.get(i).getGender(),
+                users.get(i).getRole(),
+                users.get(i).getAddress()};
+            model.addRow(rowData);
+        }
+        jTable1.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                int selectedRow = jTable1.getSelectedRow();
+                if (selectedRow != -1) {
+                    currentUser = userDAO.findById((Integer)jTable1.getValueAt(selectedRow, 0)).get(0);
+                }
+            }
         });
         jTable1.setColumnSelectionAllowed(true);
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTable1);
         jTable1.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
@@ -84,7 +128,7 @@ public class ListAccount extends javax.swing.JFrame {
         jLabel1.setText("Admin");
 
         jButton4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton4.setText("Logout");
+        jButton4.setText("Quit");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -132,19 +176,44 @@ public class ListAccount extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        if(currentUser == null) {
+            JOptionPane.showMessageDialog(null, "You have to choose an account", "Alert!", JOptionPane.OK_OPTION);
+        } else {
+            userDAO.deleteUser(currentUser.getId());
+            setVisible(false);
+            JOptionPane.showMessageDialog(null, "Delete succesfully!", "Alert!", JOptionPane.OK_OPTION);
+            ListAccount listAccount = new ListAccount();
+            listAccount.setVisible(true);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        if(currentUser == null) {
+            JOptionPane.showMessageDialog(null, "You have to choose an account", "Alert!", JOptionPane.OK_OPTION);
+        } else {
+            setVisible(false);
+            UpdateAccount updateAccount = new UpdateAccount(currentUser);
+            updateAccount.setVisible(true);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        setVisible(false);
+        CreateAccount createAccount = new CreateAccount();
+        createAccount.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
+        setVisible(false);
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jTable1MouseClicked
 
     /**
      * @param args the command line arguments
