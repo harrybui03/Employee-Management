@@ -96,7 +96,7 @@ public class Checkout extends javax.swing.JFrame {
         Timestamp timeCheckout = new Timestamp(System.currentTimeMillis());
         tracking.setCheckout(timeCheckout);
         TrackingDAO trackingDAO = new TrackingDAO();
-        trackingDAO.update(tracking);
+        trackingDAO.updateTrack(tracking);
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
         String formattedTime = sdf.format(new Date());
         JOptionPane.showMessageDialog(null, "Checkout successfully at " + formattedTime, "Checkout complete!", JOptionPane.INFORMATION_MESSAGE);

@@ -11,5 +11,8 @@ import model.Salary;
  * @author Admin
  */
 public class SalaryDAO extends DbContext<Salary>{
-    
+    public Integer save() {
+        String sql = "INSERT INTO salary(penalty_hours, bonus, hourly) VALUES(?, ?, ?)";
+        return insert(sql, null, null, 5);
+    }
 }

@@ -23,8 +23,13 @@ public class TrackingDAO extends DbContext<Tracking>{
         return insert(sql,tracking.getId(), tracking.getCheckin(), tracking.getCheckout(), tracking.getShiftId(), tracking.getUserId(), tracking.isRegisterd());
     }
     
-    public Integer update(Tracking tracking) {
+    public void updateTrack(Tracking tracking) {
         String sql = "UPDATE tracking SET checkin = ?, checkout = ?, shift_id = ?, user_id = ?, registered = ? WHERE id = ?";
-        return insert(sql, tracking.getCheckin(), tracking.getCheckout(), tracking.getShiftId(), tracking.getUserId(), tracking.isRegisterd(), tracking.getId());
+        update(sql, tracking.getCheckin(), tracking.getCheckout(), tracking.getShiftId(), tracking.getUserId(), tracking.isRegisterd(), tracking.getId());
+    }
+    
+    public void deleteByUserId(Integer id) {
+        String sql = "DELETE FROM tracking WHERE user_id = ?";
+        delete(sql, id);
     }
 }
