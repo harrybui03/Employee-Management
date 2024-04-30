@@ -9,6 +9,7 @@ import model.Shift;
 import java.sql.Timestamp;
 import java.util.List;
 import javaapplication1.admin.manage_account.view.ListAccount;
+import javaapplication1.manager.manage_shift.view.ManagerF;
 import javaapplication1.seller.checkin_checkout.CheckingCtr;
 import javaapplication1.seller.checkin_checkout.view.ShiftDetail;
 import javax.swing.SwingUtilities;
@@ -44,8 +45,10 @@ public class JavaApplication1 {
 //        System.out.println(gets.size());
 //        ListAccount listAccount = new ListAccount();
 //        listAccount.setVisible(true);
-//        CheckingCtr checkingCtr = new CheckingCtr(3);
-         ListAccount listAccount = new ListAccount();
-         listAccount.setVisible(true);
+        CheckingCtr checkingCtr = new CheckingCtr(5);
+//         ListAccount listAccount = new ListAccount();
+//         listAccount.setVisible(true);
+//        ManagerF manager = new ManagerF();
+//        manager.setVisible(true);
     }
 }

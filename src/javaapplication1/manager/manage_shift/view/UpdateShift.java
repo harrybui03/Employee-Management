@@ -4,7 +4,12 @@
  */
 package javaapplication1.manager.manage_shift.view;
 
+import dao.ShiftDAO;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
+import model.Shift;
 
 /**
  *
@@ -15,7 +20,10 @@ public class UpdateShift extends javax.swing.JFrame {
     /**
      * Creates new form UpdateShift
      */
-    public UpdateShift() {
+    private Shift shift;
+    private ShiftDAO shiftDAO = new ShiftDAO();
+    public UpdateShift(Shift shift) {
+        this.shift = shift;
         initComponents();
     }
 
@@ -50,6 +58,12 @@ public class UpdateShift extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel4.setText("End Shift");
+
+        jTextField1.setText(shift.getTimeStart().toString().substring(0, 10));
+
+        jTextField2.setText(shift.getTimeStart().toString().substring(11, 16));
+
+        jTextField3.setText(shift.getTimeEnd().toString().substring(11, 16));
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButton1.setText("Update");
@@ -116,43 +130,24 @@ public class UpdateShift extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        JOptionPane.showMessageDialog(null, "Create Shift successfully", "Create Shift!", JOptionPane.OK_OPTION);
+        String start = jTextField2.getText();
+        String end = jTextField3.getText();
+        String date = jTextField1.getText();
+        String timeStartS = date+" "+start;
+        String timeEndS = date+" "+end;
+        shift.setTimeStart(Timestamp.valueOf(LocalDateTime.parse(timeStartS, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))));
+        shift.setTimeEnd(Timestamp.valueOf(LocalDateTime.parse(timeEndS, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))));
+        shiftDAO.updateShift(shift);
+        setVisible(false);
+        JOptionPane.showMessageDialog(null, "Update Shift successfully", "Create Shift!", JOptionPane.INFORMATION_MESSAGE);
+        ManagerF managerF = new ManagerF();
+        managerF.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(UpdateShift.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(UpdateShift.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(UpdateShift.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(UpdateShift.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new UpdateShift().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

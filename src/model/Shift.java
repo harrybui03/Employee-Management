@@ -24,7 +24,7 @@ public class Shift {
         this.timeEnd = timeEnd;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 

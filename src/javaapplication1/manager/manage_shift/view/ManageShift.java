@@ -4,7 +4,20 @@
  */
 package javaapplication1.manager.manage_shift.view;
 
+import dao.ShiftDAO;
+import dao.TrackingDAO;
+import dao.UserDAO;
+import java.awt.event.ItemEvent;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
+import model.Shift;
+import model.Tracking;
+import model.User;
 
 /**
  *
@@ -15,7 +28,18 @@ public class ManageShift extends javax.swing.JFrame {
     /**
      * Creates new form ManageShift
      */
+    private List<Shift> shifts = new ArrayList<>();
+    private List<User> current = new ArrayList<>();
+    private List<User> registered = new ArrayList<>();
+    private List<Tracking> tracks;
+    private ShiftDAO shiftDAO = new ShiftDAO();
+    private UserDAO userDAO = new UserDAO();
+    private TrackingDAO trackingDAO = new TrackingDAO();
+    private Shift currentShift = new Shift();
+    private User currentUserRemove = new User();
+    private User currentUserAdd = new User();
     public ManageShift() {
+        shifts = shiftDAO.findAll();
         initComponents();
     }
 
@@ -31,11 +55,13 @@ public class ManageShift extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jComboBox3 = new javax.swing.JComboBox<>();
         jComboBox4 = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jLabel4 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -46,15 +72,23 @@ public class ManageShift extends javax.swing.JFrame {
         jLabel2.setText("Shift");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel3.setText("Register");
+        jLabel3.setText("Current");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {  }));
+        for(int i = 0; i < shifts.size(); i++) {
+            String id = shifts.get(i).getId().toString();
+            while(id.length() < 2) id = "0"+id;
+            SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+            jComboBox4.addItem(id + " Time start: " +
+                date.format(shifts.get(i).getTimeStart())
+                +" Time end: " +
+                date.format(shifts.get(i).getTimeEnd()));
+        }
+        jComboBox4.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBox4ItemStateChanged(evt);
+            }
+        });
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButton1.setText("Manage");
@@ -64,6 +98,99 @@ public class ManageShift extends javax.swing.JFrame {
             }
         });
 
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Id", "Username"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        for(int i = 0; i < current.size(); i++) {
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            Object[] rowData = {current.get(i).getId(),
+                current.get(i).getUsername()};
+            model.addRow(rowData);
+        }
+        jTable1.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                int selectedRow = jTable1.getSelectedRow();
+                if (selectedRow != -1) {
+                    currentUserRemove = userDAO.findById((Integer)jTable1.getValueAt(selectedRow, 0)).get(0);
+                }
+            }
+        });
+        jTable1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTable1KeyPressed(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel4.setText("Registered");
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Id", "Username"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        for(int i = 0; i < registered.size(); i++) {
+            DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+            Object[] rowData = {registered.get(i).getId(),
+                registered.get(i).getUsername()};
+            model.addRow(rowData);
+        }
+        jTable2.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                int selectedRow = jTable2.getSelectedRow();
+                if (selectedRow != -1) {
+                    currentUserAdd = userDAO.findById((Integer)jTable2.getValueAt(selectedRow, 0)).get(0);
+                }
+            }
+        });
+        jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable2MouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(jTable2);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -72,26 +199,25 @@ public class ManageShift extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(32, 32, 32)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(40, 40, 40)
-                                .addComponent(jComboBox4, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(29, 29, 29)
-                                .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(jLabel2)
+                        .addGap(40, 40, 40)
+                        .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(185, 185, 185)
-                        .addComponent(jLabel1)))
-                .addContainerGap(105, Short.MAX_VALUE))
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(146, 146, 146)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel3)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -105,21 +231,85 @@ public class ManageShift extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(78, 78, 78)
+                    .addComponent(jLabel4))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(72, 72, 72)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(68, Short.MAX_VALUE))
+                .addContainerGap(159, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Tracking track1 = null;
+        if(currentUserAdd.getId() != null)track1 = trackingDAO.findByShiftAndUserRgs(currentShift.getId(), currentUserAdd.getId()).get(0);
+        Tracking track2 = null;
+        if(currentUserRemove.getId() != null) track2 = trackingDAO.findByShiftAndUserRgs(currentShift.getId(), currentUserRemove.getId()).get(0);
+        if(track2 != null) {
+            track2.setRegisterd(false);
+            trackingDAO.updateTrack(track2);
+        }
+        if(track1 != null) {
+            track1.setRegisterd(true);
+            trackingDAO.updateTrack(track1);
+        }
+        setVisible(false);
         JOptionPane.showMessageDialog(null, "Manage Shift successfully", "Manage Shift!", JOptionPane.OK_OPTION);
+        ManagerF managerF = new ManagerF();
+        managerF.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jComboBox4ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox4ItemStateChanged
+        // TODO add your handling code here:
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
+            // Xử lý sự kiện khi một mục được chọn
+            String selectedItem = (String) jComboBox4.getSelectedItem();
+            Integer id = Integer.parseInt(selectedItem.substring(0, 2));
+            currentShift = shiftDAO.findById(id).get(0);
+            current.clear();
+            registered.clear();
+            tracks = trackingDAO.findByShift(id);
+            for(int i = 0; i < tracks.size(); i++) {
+                if(tracks.get(i).isRegisterd()) {
+                    current.add(userDAO.findById(tracks.get(i).getUserId()).get(0));
+                } else {
+                    registered.add(userDAO.findById(tracks.get(i).getUserId()).get(0));
+                }
+            }
+            addCurrent();
+            addRegistered();
+        }
+    }//GEN-LAST:event_jComboBox4ItemStateChanged
+
+    private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTable2MouseClicked
+
+    private void jTable1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyPressed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jTable1KeyPressed
+    
+    private void addCurrent() {
+        for(int i = 0; i < current.size(); i++) {
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            Object[] rowData = {current.get(i).getId(),
+            current.get(i).getUsername()};
+            model.addRow(rowData);
+        }
+    }
+    private void addRegistered() {
+        for(int i = 0; i < registered.size(); i++) {
+            DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+            Object[] rowData = {registered.get(i).getId(),
+            registered.get(i).getUsername()};
+            model.addRow(rowData);
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -157,12 +347,14 @@ public class ManageShift extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
     // End of variables declaration//GEN-END:variables
 }

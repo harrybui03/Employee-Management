@@ -35,4 +35,8 @@ public class ShiftDAO extends DbContext<Shift>{
         return query(sql, new ShiftMapper(), time, time);
     }
     
+    public void updateShift(Shift shift) {
+        String sql = "UPDATE shift SET time_start = ?, time_end = ? WHERE id = ?";
+        update(sql, shift.getTimeStart(), shift.getTimeEnd(), shift.getId());
+    }
 }

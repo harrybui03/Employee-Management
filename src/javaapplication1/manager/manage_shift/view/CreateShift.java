@@ -4,7 +4,12 @@
  */
 package javaapplication1.manager.manage_shift.view;
 
+import dao.ShiftDAO;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
+import model.Shift;
 
 /**
  *
@@ -15,6 +20,8 @@ public class CreateShift extends javax.swing.JFrame {
     /**
      * Creates new form CreateShift
      */
+    private Shift shift = new Shift();
+    private ShiftDAO shiftDao = new ShiftDAO();
     public CreateShift() {
         initComponents();
     }
@@ -108,7 +115,18 @@ public class CreateShift extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        JOptionPane.showMessageDialog(null, "Create Shift successfully", "Create Shift!", JOptionPane.OK_OPTION);
+        String start = jTextField3.getText();
+        String end = jTextField2.getText();
+        String date = jTextField1.getText();
+        String timeStartS = date+" "+start;
+        String timeEndS = date+" "+end;
+        shift.setTimeStart(Timestamp.valueOf(LocalDateTime.parse(timeStartS, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))));
+        shift.setTimeEnd(Timestamp.valueOf(LocalDateTime.parse(timeEndS, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))));
+        shiftDao.save(shift);
+        setVisible(false);
+        JOptionPane.showMessageDialog(null, "Create Shift successfully", "Create Shift!", JOptionPane.INFORMATION_MESSAGE);
+        ManagerF manage = new ManagerF();
+        manage.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
