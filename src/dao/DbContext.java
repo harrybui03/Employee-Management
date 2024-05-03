@@ -22,7 +22,7 @@ public class DbContext<T> {
             // Set up the connection properties
             String dbURL = "jdbc:mysql://localhost:3306/employee_management";
             String username = "root";
-            String password = "root";
+            String password = "password";
             Connection connection = DriverManager.getConnection(dbURL, username, password);
             System.out.println("Connect database successfully");
             return connection;
