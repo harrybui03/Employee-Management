@@ -41,6 +41,10 @@ public class CheckingCtr {
             }
         }
         
+        
+        
+  
+        
         if(currentShift != null) {
             ShiftDetail shiftDetail = new ShiftDetail(currentShift, tracking);
             shiftDetail.setVisible(true);
