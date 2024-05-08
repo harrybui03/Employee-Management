@@ -196,28 +196,36 @@ public class UpdateAccount extends javax.swing.JFrame {
                 ListAccount listAccount = new ListAccount();
                 setVisible(false);
                 listAccount.setVisible(true);
+                return;
             }
             user.setGender("Male");
             user.setAddress(jTextField4.getText());
             user.setRole((String)jComboBox1.getSelectedItem());
             userDAO.updateUser(user);
+            JOptionPane.showMessageDialog(null, "Update succesfully!", "Message!", JOptionPane.CANCEL_OPTION);
         } else if(jRadioButton2.isSelected()) {
             user.setUsername(jTextField2.getText());
             user.setPassword(jTextField5.getText());
             user.setEmail(jTextField1.getText());
-            if(userDAO.findByEmail(jTextField1.getText()).size() != 0) {
+            Integer id = userDAO.findByEmail(jTextField1.getText()).get(0).getId();
+            if(id != null && id != user.getId()) {
                 JOptionPane.showMessageDialog(null, "Email already exist!", "Alert!", JOptionPane.CANCEL_OPTION);
                 ListAccount listAccount = new ListAccount();
                 setVisible(false);
                 listAccount.setVisible(true);
+                return;
             }
             user.setGender("Female");
             user.setAddress(jTextField4.getText());
             user.setRole((String)jComboBox1.getSelectedItem());
             userDAO.updateUser(user);
+            JOptionPane.showMessageDialog(null, "Update succesfully!", "Message!", JOptionPane.CANCEL_OPTION);
         } else {
             JOptionPane.showMessageDialog(null, "You haven't choose a gender", "Alert!", JOptionPane.OK_OPTION);
         }
+        setVisible(false);
+        ListAccount listAccount = new ListAccount();
+        listAccount.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
