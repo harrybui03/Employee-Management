@@ -90,6 +90,11 @@ public class ManageShift extends javax.swing.JFrame {
                 jComboBox4ItemStateChanged(evt);
             }
         });
+        jComboBox4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox4ActionPerformed(evt);
+            }
+        });
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButton1.setText("Manage");
@@ -315,6 +320,10 @@ public class ManageShift extends javax.swing.JFrame {
         ManagerF managerF = new ManagerF();
         managerF.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox4ActionPerformed
+        
+    }//GEN-LAST:event_jComboBox4ActionPerformed
     
     private void addCurrent() {
         for(int i = 0; i < current.size(); i++) {

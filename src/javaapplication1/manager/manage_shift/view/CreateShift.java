@@ -6,6 +6,8 @@ package javaapplication1.manager.manage_shift.view;
 
 import dao.ShiftDAO;
 import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
@@ -127,9 +129,22 @@ public class CreateShift extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String start = jTextField3.getText();
-        String end = jTextField2.getText();
         String date = jTextField1.getText();
+        if (!isValidDate(date)) {
+            JOptionPane.showMessageDialog(null, "Invalid Date", "Invalid", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        String start = jTextField3.getText();
+        if (!isValidTime(start)) {
+            JOptionPane.showMessageDialog(null, "Invalid Start Time", "Invalid", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        String end = jTextField2.getText();
+        if (!isValidTime(end)) {
+            JOptionPane.showMessageDialog(null, "Invalid End Time", "Invalid", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
         String timeStartS = date+" "+start;
         String timeEndS = date+" "+end;
         shift.setTimeStart(Timestamp.valueOf(LocalDateTime.parse(timeStartS, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))));
@@ -140,7 +155,31 @@ public class CreateShift extends javax.swing.JFrame {
         ManagerF manage = new ManagerF();
         manage.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
+    public static boolean isValidDate(String dateStr) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        sdf.setLenient(false); // This will not allow the parsing to lenient
 
+        try {
+            // Parse the input date string
+            sdf.parse(dateStr);
+            return true; // If parsing successful, date is valid
+        } catch (ParseException e) {
+            return false; // If parsing fails, date is invalid
+        }
+    }
+    
+    public static boolean isValidTime(String timeStr) {
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+        sdf.setLenient(false); // This will not allow the parsing to lenient
+
+        try {
+            // Parse the input time string
+            sdf.parse(timeStr);
+            return true; // If parsing successful, time is valid
+        } catch (ParseException e) {
+            return false; // If parsing fails, time is invalid
+        }
+    }
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         setVisible(false);

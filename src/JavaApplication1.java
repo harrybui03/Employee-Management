@@ -46,9 +46,9 @@ public class JavaApplication1 {
 //        ListAccount listAccount = new ListAccount();
 //        listAccount.setVisible(true);
 //        CheckingCtr checkingCtr = new CheckingCtr(6);
-         ListAccount listAccount = new ListAccount();
-         listAccount.setVisible(true);
-//        ManagerF manager = new ManagerF();
-//        manager.setVisible(true);
+//         ListAccount listAccount = new ListAccount();
+//         listAccount.setVisible(true);
+        ManagerF manager = new ManagerF();
+        manager.setVisible(true);
     }
 }

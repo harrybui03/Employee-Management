@@ -8,6 +8,8 @@ import dao.ShiftDAO;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import static javaapplication1.manager.manage_shift.view.CreateShift.isValidDate;
+import static javaapplication1.manager.manage_shift.view.CreateShift.isValidTime;
 import javax.swing.JOptionPane;
 import model.Shift;
 
@@ -130,9 +132,21 @@ public class UpdateShift extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String start = jTextField2.getText();
-        String end = jTextField3.getText();
         String date = jTextField1.getText();
+        if (!isValidDate(date)) {
+            JOptionPane.showMessageDialog(null, "Invalid Date", "Invalid", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        String start = jTextField3.getText();
+        if (!isValidTime(start)) {
+            JOptionPane.showMessageDialog(null, "Invalid Start Time", "Invalid", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        String end = jTextField2.getText();
+        if (!isValidTime(end)) {
+            JOptionPane.showMessageDialog(null, "Invalid End Time", "Invalid", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         String timeStartS = date+" "+start;
         String timeEndS = date+" "+end;
         shift.setTimeStart(Timestamp.valueOf(LocalDateTime.parse(timeStartS, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))));
